@@ -39,23 +39,22 @@ namespace AutomationPracticeDemo.StepDefinitions
         public void WhenISignInAndProceedToCheckout()
         {
             _shoppingCartPage.SignIn();
-           
         }
 
         [When(@"I choose '(.*)'  proceed to end")]
-        public void WhenIChooseProceedToEnd(string p0)
+        public void WhenIChooseProceedToEnd(string paymentOption)
         {
             _shoppingCartPage.AddAddressDetails();
             _shoppingCartPage.AddShippingDetails();
-            _shoppingCartPage.MakePayment(p0);
-            _shoppingCartPage.VerifyConfirmOrderPage(p0);
+            _shoppingCartPage.MakePayment(paymentOption);
+            _shoppingCartPage.VerifyConfirmOrderPage(paymentOption);
             _shoppingCartPage.ConfirmOrder();
         }
 
         [Then(@"I should see the Order Confirmation according to the '(.*)'")]
-        public void ThenIShouldSeeTheOrderConfirmationAccordingToThe(string p0)
+        public void ThenIShouldSeeTheOrderConfirmationAccordingToThe(string paymentOption)
         {
-            _shoppingCartPage.VerifyOrderResultPage(p0);
+            _shoppingCartPage.VerifyOrderResultPage(paymentOption);
         }
 
 

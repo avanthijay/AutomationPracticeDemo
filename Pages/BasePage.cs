@@ -9,7 +9,6 @@ namespace AutomationPracticeDemo.Pages
     public abstract class BasePage
     {
         public const int DefaultRetryAttempts = 10;
-        public const int DefaultWaitSeconds = 3;
         public Uri BaseUrl = new Uri(ConfigurationManager.AppSettings["BaseURL"] ?? "http://automationpractice.com");
         public static IWebDriver WebDriver;
 
@@ -28,36 +27,13 @@ namespace AutomationPracticeDemo.Pages
                     url = new Uri(url + urlAppender);
                 }
                 WebDriver.Navigate().GoToUrl(url);
-                Thread.Sleep(TimeSpan.FromSeconds(DefaultWaitSeconds));
+                WaitUntilPageReady();
                 return true;
             }
             catch
             {
                 return false;
             }
-        }
-
-        /// <summary>
-        /// Find element
-        /// </summary>
-        /// <param name="element"></param>
-        /// <returns></returns>
-        public IWebElement FindElement(By element)
-        {
-            for (var i = 0; i < DefaultRetryAttempts; i++)
-            {
-                var webElement = WebDriver.FindElement(element);
-                if (webElement.Displayed)
-                {
-                    return webElement;
-                }
-
-                Thread.Sleep(TimeSpan.FromSeconds(DefaultWaitSeconds));
-            }
-
-            Assert.Fail("Element not found");
-            return null;
-
         }
 
         /// <summary>
@@ -76,7 +52,7 @@ namespace AutomationPracticeDemo.Pages
                         return true;
                     }
 
-                    Thread.Sleep(TimeSpan.FromSeconds(DefaultWaitSeconds));
+                    WaitUntilPageReady();
                 }
 
                 Assert.Fail("Element not displayed");
@@ -86,47 +62,6 @@ namespace AutomationPracticeDemo.Pages
             {
                 return false;
             }
-        }
-
-
-        /// <summary>
-        /// Check page title
-        /// </summary>
-        /// <param name="pageTitle"></param>
-        /// <returns></returns>
-        public bool CheckPageTitle(string pageTitle)
-        {
-            for (var i = 0; i < DefaultRetryAttempts; i++)
-            {
-                if (WebDriver.Title.Contains(pageTitle))
-                {
-                    return true;
-                }
-
-                Thread.Sleep(TimeSpan.FromSeconds(DefaultWaitSeconds));
-            }
-
-            return false;
-        }
-
-        /// <summary>
-        /// Check value in the page
-        /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        public bool CheckValueInThePage(string value)
-        {
-            for (var i = 0; i < DefaultRetryAttempts; i++)
-            {
-                if (WebDriver.PageSource.Contains(value))
-                {
-                    return true;
-                }
-
-                Thread.Sleep(TimeSpan.FromSeconds(DefaultWaitSeconds));
-            }
-
-            return false;
         }
 
         /// <summary>
