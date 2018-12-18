@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Threading;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -9,7 +10,7 @@ namespace AutomationPracticeDemo.Pages
     {
         public const int DefaultRetryAttempts = 10;
         public const int DefaultWaitSeconds = 3;
-        public Uri BaseUrl { get; set; }
+        public Uri BaseUrl = new Uri(ConfigurationManager.AppSettings["BaseURL"] ?? "http://automationpractice.com");
         public static IWebDriver WebDriver;
 
         /// <summary>
@@ -60,7 +61,7 @@ namespace AutomationPracticeDemo.Pages
         }
 
         /// <summary>
-        /// Check if element is present
+        /// Check if element displayed. Try default wait attempts and wait until it appears.
         /// </summary>
         /// <param name="element"></param>
         /// <returns></returns>
@@ -68,7 +69,18 @@ namespace AutomationPracticeDemo.Pages
         {
             try
             {
-                return element.Displayed;
+                for (var i = 0; i < DefaultRetryAttempts; i++)
+                {
+                    if (element.Displayed)
+                    {
+                        return true;
+                    }
+
+                    Thread.Sleep(TimeSpan.FromSeconds(DefaultWaitSeconds));
+                }
+
+                Assert.Fail("Element not displayed");
+                return false;
             }
             catch (Exception)
             {

@@ -7,10 +7,12 @@ namespace AutomationPracticeDemo.StepDefinitions
     public class SummerDressesFeatureSteps : BasePage
     {
         private readonly SummerDressesPage _summerDressPage;
+        private readonly ShoppingCartPage _shoppingCartPage;
 
         public SummerDressesFeatureSteps()
         {
             _summerDressPage  = new SummerDressesPage();
+            _shoppingCartPage = new ShoppingCartPage();
         }
 
         [Given(@"I am on the HomePage")]
@@ -29,7 +31,8 @@ namespace AutomationPracticeDemo.StepDefinitions
         [Given(@"I have added a dress to cart")]
         public void GivenIHaveAddedADressToCart()
         {
-            //Pending
+            _summerDressPage.AddDressToCart();
+            _shoppingCartPage.ProceedToSignIn();
         }
 
         [When(@"I Sign In and proceed to Checkout")]
