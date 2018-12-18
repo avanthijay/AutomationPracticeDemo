@@ -59,5 +59,15 @@ namespace AutomationPracticeDemo.Utilities {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] ExternalData {
+            get {
+                object obj = ResourceManager.GetObject("ExternalData", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

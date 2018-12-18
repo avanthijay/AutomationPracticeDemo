@@ -15,9 +15,9 @@ Scenario Outline: Summer Dress purchase
 	And I have added a dress to cart
 	When I Sign In and proceed to Checkout  
 	And I choose '<PaymentOption>'  proceed to end
-	Then I should see the Order Confirmation
+	Then I should see the Order Confirmation according to the '<PaymentOption>'
 
 	Examples: 
 	| PaymentOption |
 	| Wire          |
-	| Check         |
+	| cheque         |

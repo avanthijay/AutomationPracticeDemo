@@ -32,26 +32,33 @@ namespace AutomationPracticeDemo.StepDefinitions
         public void GivenIHaveAddedADressToCart()
         {
             _summerDressPage.AddDressToCart();
-            _shoppingCartPage.ProceedToSignIn();
+            _shoppingCartPage.CheckSummary();
         }
 
         [When(@"I Sign In and proceed to Checkout")]
         public void WhenISignInAndProceedToCheckout()
         {
-            //Pending
+            _shoppingCartPage.SignIn();
+           
         }
 
         [When(@"I choose '(.*)'  proceed to end")]
         public void WhenIChooseProceedToEnd(string p0)
         {
-            //Pending
+            _shoppingCartPage.AddAddressDetails();
+            _shoppingCartPage.AddShippingDetails();
+            _shoppingCartPage.MakePayment(p0);
+            _shoppingCartPage.VerifyConfirmOrderPage(p0);
+            _shoppingCartPage.ConfirmOrder();
         }
 
-
-        [Then(@"I should see the Order Confirmation")]
-        public void ThenIShouldSeeTheOrderConfirmation()
+        [Then(@"I should see the Order Confirmation according to the '(.*)'")]
+        public void ThenIShouldSeeTheOrderConfirmationAccordingToThe(string p0)
         {
-            //Pending
+            _shoppingCartPage.VerifyOrderResultPage(p0);
         }
+
+
+
     }
 }

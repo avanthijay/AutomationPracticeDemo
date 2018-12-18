@@ -9,13 +9,14 @@ namespace AutomationPracticeDemo.Data
     {
         private readonly XLWorkbook _workbook;
         private readonly string _workbookName;
+        private readonly string _workbookPath;
 
         public ClosedExcelDataAccess(string workbookName, byte[] workbookData)
         {
             _workbookName = Path.GetFileName(workbookName);
-            var workbookPath = Path.ChangeExtension(Path.GetTempFileName(), "xlsx");
-            File.WriteAllBytes(workbookPath, workbookData);
-            _workbook = new XLWorkbook(workbookPath)
+            _workbookPath = Path.ChangeExtension(Path.GetTempFileName(), "xlsx");
+            File.WriteAllBytes(_workbookPath, workbookData);
+            _workbook = new XLWorkbook(_workbookPath)
             {
                 EventTracking = XLEventTracking.Disabled
             };
@@ -29,7 +30,8 @@ namespace AutomationPracticeDemo.Data
 
         public string GetValue(string workSheetName, string cellAddress)
         {
-            if (!_workbook.TryGetWorksheet(workSheetName, out var worksheet))
+            IXLWorksheet worksheet;
+            if (!_workbook.TryGetWorksheet(workSheetName, out worksheet))
             {
                 var worksheetNames = string.Join(", ", _workbook.Worksheets.Select(x => x.Name));
                 var message =
@@ -42,16 +44,13 @@ namespace AutomationPracticeDemo.Data
                 if (cell == null)
                 {
                     var message =
-                        $"The cell address {cellAddress} did not return anything. Are you sure the address is correct?";
+                        string.Format(
+                            "The cell address {0} did not return anything. Are you sure the address is correct?",
+                            cellAddress);
                     throw new ArgumentException(message);
                 }
                 return cell.GetValue<string>();
             }
-        }
-
-        public string GetValue(string cellAddress)
-        {
-            return GetValue("DataReadSheet", cellAddress).Trim();
         }
     }
 }

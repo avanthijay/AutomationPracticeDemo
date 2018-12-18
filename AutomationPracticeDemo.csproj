@@ -94,6 +94,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Data\ExternalData.xlsx" />
     <None Include="Features\SummerDressesFeature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>SummerDressesFeature.feature.cs</LastGenOutput>

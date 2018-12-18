@@ -92,7 +92,7 @@ this.ScenarioInitialize(scenarioInfo);
         [NUnit.Framework.CategoryAttribute("SmokeTest")]
         [NUnit.Framework.CategoryAttribute("BasicFlow")]
         [NUnit.Framework.TestCaseAttribute("Wire", null)]
-        [NUnit.Framework.TestCaseAttribute("Check", null)]
+        [NUnit.Framework.TestCaseAttribute("cheque", null)]
         public virtual void SummerDressPurchase(string paymentOption, string[] exampleTags)
         {
             string[] @__tags = new string[] {
@@ -115,7 +115,7 @@ this.ScenarioInitialize(scenarioInfo);
 #line 17
  testRunner.And(string.Format("I choose \'{0}\'  proceed to end", paymentOption), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 18
- testRunner.Then("I should see the Order Confirmation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then(string.Format("I should see the Order Confirmation according to the \'{0}\'", paymentOption), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

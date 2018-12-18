@@ -1,6 +1,4 @@
-﻿using System;
-using System.Configuration;
-using AutomationPracticeDemo.PageFactoryObjects;
+﻿using AutomationPracticeDemo.PageFactoryObjects;
 
 namespace AutomationPracticeDemo.Pages
 {
@@ -12,6 +10,9 @@ namespace AutomationPracticeDemo.Pages
             _pageFactory = new SummerDressesPageFactory(WebDriver);
         }
 
+        /// <summary>
+        /// Go to dresses tab.
+        /// </summary>
         public void GotoDressesTab()
         {
             WaitUntilPageReady();
@@ -19,6 +20,9 @@ namespace AutomationPracticeDemo.Pages
             _pageFactory.SummerDressesTab.Click();
         }
 
+        /// <summary>
+        /// Query product list and add first product item to the cart.
+        /// </summary>
         public void AddDressToCart()
         {
             var firstProductItem = _pageFactory.GetProductItem(0);
