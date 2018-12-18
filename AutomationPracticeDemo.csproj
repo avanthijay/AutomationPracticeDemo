@@ -85,10 +85,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Features\SummerDressesFeature.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SummerDressesFeature.feature</DependentUpon>
+    </Compile>
+    <Compile Include="PageFactoryObjects\SummerDressesPageFactory.cs" />
     <Compile Include="Pages\BasePage.cs" />
+    <Compile Include="Pages\SummerDressesPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Data\ClosedExcelDataAccess.cs" />
     <Compile Include="Data\ExcelDataProvider.cs" />
+    <Compile Include="StepDefinitions\SummerDressesFeatureSteps.cs" />
     <Compile Include="Utilities\Hooks.cs" />
     <Compile Include="Data\IExcelDataAccess.cs" />
     <Compile Include="Utilities\ResourceController.Designer.cs">
@@ -99,14 +107,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Features\SummerDressesFeature.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>SummerDressesFeature.feature.cs</LastGenOutput>
+    </None>
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Features\" />
-    <Folder Include="PageFactoryObjects\" />
-    <Folder Include="StepDefinitions\" />
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="chromedriver.exe">

@@ -17,11 +17,15 @@ namespace AutomationPracticeDemo.Pages
         /// </summary>
         /// <param name="urlAppender"></param>
         /// <returns></returns>
-        public bool VisitPage(string urlAppender)
+        public bool VisitPage(string urlAppender = "")
         {
-            var url = BaseUrl + urlAppender;
             try
             {
+                Uri url = BaseUrl;
+                if (!string.IsNullOrWhiteSpace(urlAppender))
+                {
+                    url = new Uri(url + urlAppender);
+                }
                 WebDriver.Navigate().GoToUrl(url);
                 Thread.Sleep(TimeSpan.FromSeconds(DefaultWaitSeconds));
                 return true;
@@ -53,6 +57,23 @@ namespace AutomationPracticeDemo.Pages
             Assert.Fail("Element not found");
             return null;
 
+        }
+
+        /// <summary>
+        /// Check if element is present
+        /// </summary>
+        /// <param name="element"></param>
+        /// <returns></returns>
+        public static bool IsElementDisplayed(IWebElement element)
+        {
+            try
+            {
+                return element.Displayed;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
 
