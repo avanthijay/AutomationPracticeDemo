@@ -9,14 +9,31 @@ Pre-Requestees:
 	3. SpecFlow Plugin for Visual Studio
 	4. Microsoft Excel installed
 
-Test Summary: Summer Dress Purchase - Basic Flow (Happy Path)
-	1. Go to www.automationpractice.com
-	2. Browse dresses
-	3. Select a dress
-	4. Go to checkout
-	5. Sign in
-	6. Process checkout
-	7. Confirm results
+Test Summary: Three tests are written to validate page elements and one end to end functional test 
+Test : ValidateContentsWidget
+	1. Go to https://ultimateqa.com/automation/
+	2. Hide contents
+	3. Check the content list
+	4. SHow Contents
+	5. Check the content list
+
+	Test : ValidateSearchBoxFunctionality -  positive 
+	1. Go to https://ultimateqa.com/automation/
+	2. Search for positive results
+	3. Validate the results
+	Test : ValidateSearchBoxFunctionality -  Negative 
+	1. Go to https://ultimateqa.com/automation/
+	2. Search for negative results
+	3. Validate the results
+
+	Test : Login In
+	1. Go to https://ultimateqa.com/automation/
+	2. Click on Login link
+	3. Enter valid Email
+	4. Enter valid Pwd
+	5. Click on SignIn
+	6.Verify Dashboard (This part is commented due to UltimateQA restrictions of Automated Login)
+
 
 How to Run Tests:
 	1. Open ‘AutomationPracticeDemo.sln’ solution.

@@ -9,7 +9,7 @@ namespace AutomationPracticeDemo.Pages
     public abstract class BasePage
     {
         public const int DefaultRetryAttempts = 10;
-        public Uri BaseUrl = new Uri(ConfigurationManager.AppSettings["BaseURL"] ?? "http://automationpractice.com");
+        public Uri BaseUrl = new Uri(ConfigurationManager.AppSettings["BaseURL"] ?? "https://ultimateqa.com/automation/");
         public static IWebDriver WebDriver;
 
         /// <summary>
@@ -83,6 +83,25 @@ namespace AutomationPracticeDemo.Pages
 
                     Thread.Sleep(500);
                 } while (numBusyItems > 1);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public static void WaitForELement(IWebElement element)
+        {
+            try
+            {
+                for (var i = 0; i < DefaultRetryAttempts; i++)
+                {
+                    if (!element.Displayed)
+                    {
+                        Thread.Sleep(500);
+                    }
+                }
+                Assert.Fail("Element not displayed");
             }
             catch (Exception e)
             {
